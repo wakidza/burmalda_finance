@@ -1,0 +1,28 @@
+# Виртуальное окружение
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# База данных (создаётся локально)
+*.db
+*.sqlite3
+
+# IDE / ОС / служебное
+.vscode/
+.idea/
+.claude/
+.DS_Store
+Thumbs.db
+
+# Локальные служебные файлы распаковки задания
+task_unpacked/
+extract.py
+task.txt

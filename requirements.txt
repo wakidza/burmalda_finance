@@ -1,0 +1,9 @@
+# Runtime-зависимости приложения «Бурмалда Finance»
+fastapi==0.136.3
+uvicorn[standard]==0.49.0
+SQLAlchemy==2.0.50
+pydantic==2.13.4
+
+# Зависимости для тестирования
+pytest==9.0.3
+httpx==0.28.1
