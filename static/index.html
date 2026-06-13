@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бурмалда Finance — учёт личных финансов</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <h1 class="brand">💰 Бурмалда Finance</h1>
+      <div class="period">
+        <label>Период:
+          <select id="filter-year"></select>
+        </label>
+        <label>
+          <select id="filter-month">
+            <option value="">весь год</option>
+          </select>
+        </label>
+        <a class="api-link" href="/docs" target="_blank" rel="noopener">API&nbsp;(Swagger)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Сводка -->
+    <section class="cards" aria-label="Сводка за период">
+      <div class="card card--income">
+        <span class="card__label">Доходы</span>
+        <span class="card__value" id="sum-income">—</span>
+      </div>
+      <div class="card card--expense">
+        <span class="card__label">Расходы</span>
+        <span class="card__value" id="sum-expense">—</span>
+      </div>
+      <div class="card card--balance">
+        <span class="card__label">Баланс</span>
+        <span class="card__value" id="sum-balance">—</span>
+      </div>
+    </section>
+
+    <div class="grid">
+      <!-- Левая колонка: формы -->
+      <div class="col">
+        <section class="panel">
+          <h2>Новая операция</h2>
+          <form id="tx-form" class="form">
+            <div class="form__row">
+              <label>Тип
+                <select id="tx-type" required>
+                  <option value="expense">Расход</option>
+                  <option value="income">Доход</option>
+                </select>
+              </label>
+              <label>Сумма
+                <input id="tx-amount" type="number" step="0.01" min="0.01" placeholder="0.00" required />
+              </label>
+            </div>
+            <div class="form__row">
+              <label>Категория
+                <select id="tx-category" required></select>
+              </label>
+              <label>Дата
+                <input id="tx-date" type="date" required />
+              </label>
+            </div>
+            <label>Комментарий
+              <input id="tx-description" type="text" maxlength="255" placeholder="например, продукты на неделю" />
+            </label>
+            <button type="submit" class="btn btn--primary">Добавить операцию</button>
+            <p class="form__error" id="tx-error" role="alert"></p>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>Новая категория</h2>
+          <form id="cat-form" class="form">
+            <div class="form__row">
+              <label>Название
+                <input id="cat-name" type="text" maxlength="100" placeholder="например, Спорт" required />
+              </label>
+              <label>Тип
+                <select id="cat-type">
+                  <option value="expense">Расход</option>
+                  <option value="income">Доход</option>
+                </select>
+              </label>
+            </div>
+            <button type="submit" class="btn">Добавить категорию</button>
+            <p class="form__error" id="cat-error" role="alert"></p>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>Бюджеты месяца</h2>
+          <p class="hint" id="budget-hint">Контроль лимитов расходов за выбранный месяц.</p>
+          <ul class="budget-list" id="budget-list"></ul>
+        </section>
+      </div>
+
+      <!-- Правая колонка: аналитика + список -->
+      <div class="col">
+        <section class="panel">
+          <h2>Расходы по категориям</h2>
+          <ul class="breakdown" id="breakdown"></ul>
+        </section>
+
+        <section class="panel">
+          <div class="panel__head">
+            <h2>Операции</h2>
+            <div class="filters">
+              <select id="list-type">
+                <option value="">все типы</option>
+                <option value="income">доходы</option>
+                <option value="expense">расходы</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Дата</th>
+                  <th>Категория</th>
+                  <th>Комментарий</th>
+                  <th class="num">Сумма</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="tx-tbody"></tbody>
+            </table>
+          </div>
+          <p class="empty" id="tx-empty" hidden>Операций за выбранный период нет.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span>Бурмалда Finance · учебный проект практики · <a href="/docs">REST API</a></span>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+/* Бурмалда Finance — стили интерфейса.
+   Адаптивная вёрстка: на мобильных колонки складываются в одну. */
+
+:root {
+  --bg: #0f172a;
+  --bg-soft: #1e293b;
+  --panel: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --income: #16a34a;
+  --expense: #dc2626;
+  --balance: #2563eb;
+  --warn: #d97706;
+  --radius: 14px;
+  --shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 8px 24px rgba(15, 23, 42, 0.06);
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #f1f5f9;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* ---- Шапка ---- */
+.topbar {
+  background: linear-gradient(135deg, #1e293b, #2563eb);
+  color: #fff;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.topbar__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.brand { font-size: 1.35rem; margin: 0; font-weight: 700; }
+.period { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.period label { font-size: 0.85rem; display: flex; align-items: center; gap: 6px; }
+.period select {
+  border-radius: 8px;
+  border: none;
+  padding: 6px 8px;
+  font-size: 0.9rem;
+}
+.api-link {
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  transition: background 0.15s;
+}
+.api-link:hover { background: rgba(255, 255, 255, 0.15); }
+
+/* ---- Контейнер ---- */
+.container { max-width: 1100px; margin: 0 auto; padding: 22px 20px 60px; }
+
+/* ---- Карточки сводки ---- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.card {
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+  border-left: 5px solid var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.card__label { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.card__value { font-size: 1.7rem; font-weight: 700; }
+.card--income { border-left-color: var(--income); }
+.card--income .card__value { color: var(--income); }
+.card--expense { border-left-color: var(--expense); }
+.card--expense .card__value { color: var(--expense); }
+.card--balance { border-left-color: var(--balance); }
+.card--balance .card__value { color: var(--balance); }
+
+/* ---- Сетка колонок ---- */
+.grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.col { display: flex; flex-direction: column; gap: 20px; }
+
+/* ---- Панели ---- */
+.panel {
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+.panel h2 { margin: 0 0 14px; font-size: 1.05rem; }
+.panel__head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.panel__head h2 { margin: 0; }
+.hint { color: var(--muted); font-size: 0.85rem; margin: -6px 0 12px; }
+
+/* ---- Формы ---- */
+.form { display: flex; flex-direction: column; gap: 12px; }
+.form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form label { display: flex; flex-direction: column; gap: 4px; font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+.form input, .form select {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 10px;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: #fff;
+}
+.form input:focus, .form select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.form__error { color: var(--expense); font-size: 0.83rem; min-height: 1em; margin: 0; }
+
+/* ---- Кнопки ---- */
+.btn {
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  color: var(--text);
+  border-radius: 9px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.05s;
+}
+.btn:hover { background: #eef2f7; }
+.btn:active { transform: translateY(1px); }
+.btn--primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.btn--primary:hover { background: var(--primary-dark); }
+.btn--icon {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.btn--icon:hover { background: #fee2e2; color: var(--expense); }
+
+/* ---- Разбивка по категориям ---- */
+.breakdown { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.breakdown li { display: flex; flex-direction: column; gap: 4px; }
+.breakdown__head { display: flex; justify-content: space-between; font-size: 0.9rem; }
+.breakdown__bar { height: 8px; background: #eef2f7; border-radius: 99px; overflow: hidden; }
+.breakdown__fill { height: 100%; background: var(--expense); border-radius: 99px; }
+
+/* ---- Бюджеты ---- */
+.budget-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.budget-list li { display: flex; flex-direction: column; gap: 4px; }
+.budget__head { display: flex; justify-content: space-between; font-size: 0.9rem; }
+.budget__bar { height: 8px; background: #eef2f7; border-radius: 99px; overflow: hidden; }
+.budget__fill { height: 100%; background: var(--income); border-radius: 99px; transition: width 0.3s; }
+.budget__fill.warn { background: var(--warn); }
+.budget__fill.over { background: var(--expense); }
+.budget__meta { font-size: 0.78rem; color: var(--muted); }
+
+/* ---- Таблица операций ---- */
+.table-wrap { overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.table th, .table td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--border); }
+.table th { color: var(--muted); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.table td.num, .table th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.amount-income { color: var(--income); font-weight: 600; }
+.amount-expense { color: var(--expense); font-weight: 600; }
+.badge { display: inline-block; font-size: 0.72rem; padding: 2px 8px; border-radius: 99px; background: #eef2f7; color: var(--muted); }
+.empty { color: var(--muted); text-align: center; padding: 18px; }
+
+/* ---- Подвал ---- */
+.footer { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 24px; }
+.footer a { color: var(--primary); }
+
+/* ---- Тост-уведомление ---- */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(40px);
+  background: #0f172a;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+  font-size: 0.9rem;
+  z-index: 50;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.error { background: var(--expense); }
+
+/* ---- Адаптивность ---- */
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .form__row { grid-template-columns: 1fr; }
+  .brand { font-size: 1.1rem; }
+  .card__value { font-size: 1.4rem; }
+}
